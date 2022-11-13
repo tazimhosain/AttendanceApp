@@ -1,7 +1,9 @@
 package com.example.attendanceapp;
 
 import android.content.Context;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -30,7 +32,7 @@ public class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ClassViewHol
         this.onItemClickListener = onItemClickListener;
     }
 
-    public static class ClassViewHolder extends RecyclerView.ViewHolder{
+    public static class ClassViewHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener {
         TextView className;
         TextView subjectName;
 
@@ -39,6 +41,14 @@ public class ClassAdapter extends RecyclerView.Adapter<ClassAdapter.ClassViewHol
             className = itemView.findViewById(R.id.class_tv);
             subjectName = itemView.findViewById(R.id.subject_tv);
             itemView.setOnClickListener(v->onItemClickListener.onClick(getAdapterPosition()));
+            itemView.setOnCreateContextMenuListener(this);
+        }
+
+
+        @Override
+        public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+            menu.add(getAdapterPosition(),0,0,"EDIT");
+            menu.add(getAdapterPosition(),1,0,"DELETE");
         }
     }
 
