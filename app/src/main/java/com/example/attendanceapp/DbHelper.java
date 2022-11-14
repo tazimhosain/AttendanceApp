@@ -11,7 +11,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.Nullable;
 
 class DbHelper extends SQLiteOpenHelper {
-    private static final int VERSION = 2;
+    private static final int VERSION = 1;
 
     //class table
     private static final String CLASS_TABLE_NAME = "CLASS_TABLE";
@@ -151,7 +151,7 @@ class DbHelper extends SQLiteOpenHelper {
         return database.update(STUDENT_TABLE_NAME,values,S_ID+"=?",new String[]{String.valueOf(sid)});
     }
 
-    long addStatus(long sid,long cid,String date,String status){
+    long addStatus(long sid, long cid, String date, String status){
         SQLiteDatabase database = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(S_ID,sid);
@@ -170,7 +170,7 @@ class DbHelper extends SQLiteOpenHelper {
     }
 
     @SuppressLint("Range")
-    String getStatus(long sid, String date){
+    String getStatus(long sid,String date){
         String status=null;
         SQLiteDatabase database = this.getReadableDatabase();
         String whereClause = DATE_KEY +"='"+date+"' AND "+S_ID+"="+sid;
